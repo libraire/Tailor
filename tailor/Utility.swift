@@ -133,3 +133,34 @@ func completedSelectionRequest(_ request: VNRequest?, error: Error?, image: CGIm
 //    convertCGImageToNSImage(image).cropImage(boundingBox: boundingBox)?.copyImageToClipboard()
     
 }
+
+
+func completedPreviewRequest(_ request: VNRequest?, error: Error?, image: CGImage) {
+    guard let rectangles = request?.results as? [VNRectangleObservation] else {
+        guard let error = error else { return }
+        print("Error: Rectangle detection failed with error: \(error.localizedDescription)")
+        return
+    }
+    
+    if (rectangles.isEmpty) {
+        return
+    }
+    
+    if (rectangles.count  == 1) {
+        convertCGImageToNSImage(image).preview()
+        return
+    }
+    
+    let one = rectangles.reduce(rectangles.first!) { largerOne, next in
+        let size1 = largerOne.boundingBox.width * largerOne.boundingBox.height
+        let size2 = next.boundingBox.width * next.boundingBox.height
+        if(size1 > size2) {
+            return largerOne
+        }
+        return next
+    }
+    
+    convertCGImageToNSImage(image).cropImage(boundingBox: one.boundingBox)?.preview()
+    
+}
+

@@ -82,13 +82,27 @@ struct RectView : View {
             if (observableHoveringObject.isHovering(index: self.rect.id)) {
                 HStack {
                     Spacer()
+                    
+                    Button(action: {
+                        image.cropImage(boundingBox: rect.observation.boundingBox)?
+                            .preview()
+                        self.window?.close()
+                    }) {
+                        Text("Preview")
+                            .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }.alignmentGuide(HorizontalAlignment.trailing) { d in
+                        d[HorizontalAlignment.trailing]
+                    }
+                    
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .copyImageToClipboard()
                         self.window?.close()
                     }) {
                         Text("Copy")
-                            .padding()
+                            .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }.alignmentGuide(HorizontalAlignment.trailing) { d in
@@ -101,7 +115,7 @@ struct RectView : View {
                         self.window?.close()
                     }) {
                         Text("Save")
-                            .padding()
+                            .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }.alignmentGuide(HorizontalAlignment.trailing) { d in

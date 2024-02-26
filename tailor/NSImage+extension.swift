@@ -84,4 +84,32 @@ extension NSImage {
         pasteboard.writeObjects([item])
     }
     
+    
+    func preview() {
+        
+        
+        guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+            print("Failed to get CGImage from the image.")
+            return
+        }
+        
+        let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+        if let imageData = bitmapRep.representation(using: .jpeg, properties: [:]) {
+            let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            let temporaryFileURL = temporaryDirectoryURL.appendingPathComponent("clipboard_image.jpg")
+            
+            do {
+                try imageData.write(to: temporaryFileURL)
+                let configuration = NSWorkspace.OpenConfiguration()
+                configuration.activates = true
+                
+                NSWorkspace.shared.open([temporaryFileURL], withApplicationAt: URL(fileURLWithPath: "/System/Applications/Preview.app"), configuration: configuration) { _, _ in
+                    // Completion handler code here
+                }
+            } catch {
+                print("Error writing image data to temporary file:", error)
+            }
+        }
+    }
+    
 }

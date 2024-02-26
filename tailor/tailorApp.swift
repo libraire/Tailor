@@ -30,6 +30,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let selectionMenuItem = NSMenuItem(title: "Selection", action: #selector(selectionScreen(_:)), keyEquivalent: "s")
         menu.addItem(selectionMenuItem)
         
+        
+        let previewMenuItem = NSMenuItem(title: "Preview rectangle", action: #selector(previewRectangle(_:)), keyEquivalent: "p")
+        menu.addItem(previewMenuItem)
+        
+        let previewScreenMenuItem = NSMenuItem(title: "Preview Screen", action: #selector(previewScreen(_:)), keyEquivalent: "a")
+        menu.addItem(previewScreenMenuItem)
+        
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem.menu = menu
@@ -41,12 +48,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             createVisionRequest(cgImage: getImageFromClipboard(),completion: completedVisionRequest)
         }
         // for debug
-        // addTransparentOverlay(image: NSImage(), rectangles: [])
+//         addTransparentOverlay(image: NSImage(), rectangles: [])
     }
     
     @objc func selectionScreen(_ sender: NSMenuItem) {
         if(captureSelection()) {
             createVisionRequest(cgImage: getImageFromClipboard(),completion: completedSelectionRequest)
+        }
+    }
+    
+    @objc func previewRectangle(_ sender: NSMenuItem) {
+        if(captureToClipboard()) {
+            createVisionRequest(cgImage: getImageFromClipboard(),completion: completedPreviewRequest)
+        }
+    }
+    
+    @objc func previewScreen(_ sender: NSMenuItem) {
+        if captureToClipboard(), let cgImage = getImageFromClipboard() {
+            convertCGImageToNSImage(cgImage).preview()
         }
     }
 }
