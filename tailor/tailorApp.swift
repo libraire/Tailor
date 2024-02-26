@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(selectionMenuItem)
         
         
-        let previewMenuItem = NSMenuItem(title: "Preview rectangle", action: #selector(previewRectangle(_:)), keyEquivalent: "p")
+        let previewMenuItem = NSMenuItem(title: "Preview Rectangle", action: #selector(previewRectangle(_:)), keyEquivalent: "p")
         menu.addItem(previewMenuItem)
         
         let previewScreenMenuItem = NSMenuItem(title: "Preview Screen", action: #selector(previewScreen(_:)), keyEquivalent: "a")
