@@ -9,13 +9,13 @@ import SwiftUI
 import Vision
 
 struct ImageOverlayView: View {
-    @State private var image: NSImage
-    private var window: NSWindow? = nil
+    private var image: NSImage
+
     private var rectanges: [TailorRectangle] = []
     
-    init(_ image: NSImage, _ window: NSWindow, _ rectanges: [VNRectangleObservation]?) {
+    init(_ image: NSImage, _ rectanges: [VNRectangleObservation]?) {
+        
         self.image = image
-        self.window = window
         
         if let rectanges = rectanges {
             let transformProperties = CGSize.aspectFit(aspectRatio: NSScreen.main?.frame.size ?? CGSizeZero, boundingSize: NSScreen.main?.frame.size ?? CGSizeZero)
@@ -36,19 +36,17 @@ struct ImageOverlayView: View {
             Rectangle()
                 .overlay {
                     ForEach(self.rectanges) { rect in
-                        RectView(image, self.window!, rect)
+                        RectView(image, rect)
                     }
                 }
                 .foregroundColor(Color.black.opacity(0.5))
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture { gestureLocation in
-                    self.window?.close()
                 }
         }.onAppear {
             NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { nsevent in
                 // Press Escape to close
                 if nsevent.keyCode == 53 {
-                    self.window?.close()
                 }
                 return nsevent
             }
@@ -62,11 +60,9 @@ struct RectView : View {
     private var rect: TailorRectangle
     private var image: NSImage
     @StateObject var observableHoveringObject: ObservableHoveringObject = ObservableHoveringObject.shared
-    private var window: NSWindow? = nil
     
-    init(_ image: NSImage, _ window: NSWindow, _ rect: TailorRectangle) {
+    init(_ image: NSImage, _ rect: TailorRectangle) {
         self.image = image
-        self.window = window
         self.rect = rect
     }
     
@@ -86,7 +82,6 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .preview()
-                        self.window?.close()
                     }) {
                         Text("Preview")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -99,7 +94,6 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .copyImageToClipboard()
-                        self.window?.close()
                     }) {
                         Text("Copy")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -112,7 +106,6 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .saveToFile()
-                        self.window?.close()
                     }) {
                         Text("Save")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -132,7 +125,6 @@ struct RectView : View {
             }
             .position(x:rect.positionX,y:rect.positionY)
             .onTapGesture {
-                self.window?.close()
             }
     }
     

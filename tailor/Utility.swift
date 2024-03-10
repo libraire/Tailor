@@ -17,7 +17,7 @@ public func addTransparentOverlay(image: NSImage, rectangles : [VNRectangleObser
                                  backing: .buffered,
                                  defer: false)
     
-    let overlayView = ImageOverlayView(image, overlayWindow,rectangles)
+    let overlayView = ImageOverlayView(image,rectangles)
     overlayWindow.isOpaque = false
     overlayWindow.backgroundColor = .clear
     overlayWindow.level = .floating
@@ -55,14 +55,9 @@ func createVisionRequest(cgImage: CGImage?, completion: @escaping (VNRequest?, E
     }
     
     request.maximumObservations = 0
-    //    request.minimumAspectRatio = 0
-    //    request.maximumAspectRatio = 1
-    //    request.minimumSize = 0.2
-    //    request.quadratureTolerance = 2
-    //    request.minimumConfidence = 0.5
     request.minimumAspectRatio = 0.5
     request.maximumAspectRatio = 1
-    request.minimumSize = 0.2
+    request.minimumSize = 0.1
     request.quadratureTolerance = 45
     request.minimumConfidence = 0.2
     

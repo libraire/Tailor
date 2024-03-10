@@ -63,7 +63,7 @@ struct ContentView: View {
         request.maximumObservations = 0
         request.minimumAspectRatio = 0.5
         request.maximumAspectRatio = 1
-        request.minimumSize = 0.5
+        request.minimumSize = 0.1
         request.quadratureTolerance = 45
         request.minimumConfidence = 0.2
 
