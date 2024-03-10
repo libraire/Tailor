@@ -10,19 +10,8 @@ import Vision
 import SwiftUI
 
 public func addTransparentOverlay(image: NSImage, rectangles : [VNRectangleObservation]) {
-    guard let screen = NSScreen.main else { return }
-    
-    let overlayWindow = NSWindow(contentRect: screen.frame,
-                                 styleMask: .borderless,
-                                 backing: .buffered,
-                                 defer: false)
-    
-    let overlayView = ImageOverlayView(image,rectangles)
-    overlayWindow.isOpaque = false
-    overlayWindow.backgroundColor = .clear
-    overlayWindow.level = .floating
-    overlayWindow.contentView = NSHostingView(rootView: overlayView)
-    overlayWindow.makeKeyAndOrderFront(nil)
+    let overlayView = ImageOverlayView(image, rectangles)
+    WindowManager.shared.showContentView(contentView: NSHostingView(rootView: overlayView))
 }
 
 

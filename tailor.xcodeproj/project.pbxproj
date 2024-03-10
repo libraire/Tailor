@@ -16,6 +16,7 @@
 		441BC6E12B81E79E0037BAFD /* ImageOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441BC6E02B81E79E0037BAFD /* ImageOverlay.swift */; };
 		444215752B791C5500B20015 /* CGSize+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444215742B791C5500B20015 /* CGSize+extension.swift */; };
 		449EFA1C2B75EC4F00867CEF /* ScreenCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449EFA1B2B75EC4F00867CEF /* ScreenCapture.swift */; };
+		44B42F6A2B9D394100E83437 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B42F692B9D394100E83437 /* WindowManager.swift */; };
 		44BEB4702B73D9A0003CCA22 /* tailorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BEB46F2B73D9A0003CCA22 /* tailorApp.swift */; };
 		44BEB4722B73D9A0003CCA22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BEB4712B73D9A0003CCA22 /* ContentView.swift */; };
 		44BEB4742B73D9A2003CCA22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44BEB4732B73D9A2003CCA22 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		441BC6E02B81E79E0037BAFD /* ImageOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOverlay.swift; sourceTree = "<group>"; };
 		444215742B791C5500B20015 /* CGSize+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+extension.swift"; sourceTree = "<group>"; };
 		449EFA1B2B75EC4F00867CEF /* ScreenCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCapture.swift; sourceTree = "<group>"; };
+		44B42F692B9D394100E83437 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		44BEB46C2B73D9A0003CCA22 /* Tailor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tailor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44BEB46F2B73D9A0003CCA22 /* tailorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tailorApp.swift; sourceTree = "<group>"; };
 		44BEB4712B73D9A0003CCA22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				441BC6DC2B81E5FE0037BAFD /* TailorRectangle.swift */,
 				441BC6DE2B81E62A0037BAFD /* Utility.swift */,
 				441BC6E02B81E79E0037BAFD /* ImageOverlay.swift */,
+				44B42F692B9D394100E83437 /* WindowManager.swift */,
 			);
 			path = tailor;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				441BC6DF2B81E62A0037BAFD /* Utility.swift in Sources */,
 				444215752B791C5500B20015 /* CGSize+extension.swift in Sources */,
 				441BC6D92B81DB910037BAFD /* ObservableHoveringObject.swift in Sources */,
+				44B42F6A2B9D394100E83437 /* WindowManager.swift in Sources */,
 				441BC6D72B81B0000037BAFD /* NSImage+extension.swift in Sources */,
 				44BEB4722B73D9A0003CCA22 /* ContentView.swift in Sources */,
 				449EFA1C2B75EC4F00867CEF /* ScreenCapture.swift in Sources */,

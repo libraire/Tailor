@@ -9,12 +9,10 @@ import SwiftUI
 import Vision
 
 struct ImageOverlayView: View {
-    private var image: NSImage
-
+    @State private var image: NSImage
     private var rectanges: [TailorRectangle] = []
     
     init(_ image: NSImage, _ rectanges: [VNRectangleObservation]?) {
-        
         self.image = image
         
         if let rectanges = rectanges {
@@ -42,11 +40,15 @@ struct ImageOverlayView: View {
                 .foregroundColor(Color.black.opacity(0.5))
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture { gestureLocation in
+                    
+                    
+                    WindowManager.shared.closeWindow()
                 }
         }.onAppear {
             NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { nsevent in
                 // Press Escape to close
                 if nsevent.keyCode == 53 {
+                    WindowManager.shared.closeWindow()
                 }
                 return nsevent
             }
@@ -60,6 +62,7 @@ struct RectView : View {
     private var rect: TailorRectangle
     private var image: NSImage
     @StateObject var observableHoveringObject: ObservableHoveringObject = ObservableHoveringObject.shared
+    private var window: NSWindow? = nil
     
     init(_ image: NSImage, _ rect: TailorRectangle) {
         self.image = image
@@ -82,6 +85,7 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .preview()
+                        WindowManager.shared.closeWindow()
                     }) {
                         Text("Preview")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -94,6 +98,7 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .copyImageToClipboard()
+                        WindowManager.shared.closeWindow()
                     }) {
                         Text("Copy")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -106,6 +111,7 @@ struct RectView : View {
                     Button(action: {
                         image.cropImage(boundingBox: rect.observation.boundingBox)?
                             .saveToFile()
+                        WindowManager.shared.closeWindow()
                     }) {
                         Text("Save")
                             .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
@@ -125,6 +131,7 @@ struct RectView : View {
             }
             .position(x:rect.positionX,y:rect.positionY)
             .onTapGesture {
+                WindowManager.shared.closeWindow()
             }
     }
     
