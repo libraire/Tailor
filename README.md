@@ -9,8 +9,8 @@ If no retangles are detected, it switches to selection mode.
 - Preview Rectangle. Open the largest rectangle with MacOS Preview app for editing.
 - Preview Screen. Open the whole screen with Preview app.
 
-# Demo
-![Image](./logo/demo.jpeg)
+# View Demo on Youtube
+[![Image](./logo/demo.jpeg)](https://youtu.be/93JuJJTdvsA)
 
 
 # Current Deficiency
